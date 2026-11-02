@@ -233,13 +233,20 @@ code {
 .brand { flex: none; padding: 6px 0; }
 .brand img { width: 176px; }
 
-.nav { margin-left: auto; }
-.nav-list { display: flex; gap: 28px; }
+.nav { margin-left: auto; min-width: 0; }
+.nav-list {
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+  gap: 18px;
+}
 .nav-list a {
   text-decoration: none;
   font-weight: 600;
+  font-size: 15px;
   color: var(--white);
   opacity: .82;
+  white-space: nowrap;
   transition: opacity .15s ease, color .15s ease;
 }
 .nav-list a:hover { opacity: 1; color: var(--yellow); }
@@ -247,9 +254,9 @@ code {
 .nav-toggle { display: none; }
 .nav-ip { display: none; }
 
-@media (max-width: 960px) {
+/* Extra nav items (SMP + Log in) — switch to menu before labels wrap */
+@media (max-width: 1180px) {
   .header-inner { gap: 16px; }
-  .header-ip { display: none; }
   .nav-list .nav-ip { display: block; padding: 18px 0 4px; }
   .nav-list .nav-ip .ip-pill { margin-top: 0; }
   .nav-toggle {
@@ -271,6 +278,7 @@ code {
     position: fixed;
     top: var(--header-h); left: 0; right: 0;
     flex-direction: column;
+    align-items: stretch;
     gap: 0;
     padding: 8px 24px 24px;
     background: var(--night);
@@ -1064,7 +1072,7 @@ html:has([data-mode-nav]) { scroll-padding-top: calc(var(--header-h) + 64px); }
 }
 .nav-list .nav-login { display: none; }
 
-@media (max-width: 960px) {
+@media (max-width: 1180px) {
   .header-actions { display: none; }
   .nav-list .nav-login { display: block; }
 }
