@@ -1,0 +1,29 @@
+# Optional local / EasyPanel Compose template
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        NEXT_PUBLIC_SITE_URL: ${NEXT_PUBLIC_SITE_URL:-https://flashmob.gg}
+        NEXT_PUBLIC_SERVER_ADDRESS: ${NEXT_PUBLIC_SERVER_ADDRESS:-play.flashmob.gg}
+        NEXT_PUBLIC_DISCORD_URL: ${NEXT_PUBLIC_DISCORD_URL:-}
+        NEXT_PUBLIC_SHOW_PLAYER_COUNT: ${NEXT_PUBLIC_SHOW_PLAYER_COUNT:-true}
+    ports:
+      - "${PORT:-3000}:3000"
+    environment:
+      AUTH_SECRET: ${AUTH_SECRET:-change-me-before-launch}
+      AUTH_PLUGIN_SECRET: ${AUTH_PLUGIN_SECRET:-dev-plugin-secret}
+      NEXT_PUBLIC_SITE_URL: ${NEXT_PUBLIC_SITE_URL:-https://flashmob.gg}
+      NEXT_PUBLIC_SERVER_ADDRESS: ${NEXT_PUBLIC_SERVER_ADDRESS:-play.flashmob.gg}
+      NEXT_PUBLIC_DISCORD_URL: ${NEXT_PUBLIC_DISCORD_URL:-}
+      NEXT_PUBLIC_SHOW_PLAYER_COUNT: ${NEXT_PUBLIC_SHOW_PLAYER_COUNT:-true}
+      PORT: "3000"
+      HOSTNAME: "0.0.0.0"
+    volumes:
+      # Keep registered accounts across container rebuilds
+      - flashmob-data:/app/.data
+    restart: unless-stopped
+
+volumes:
+  flashmob-data:
